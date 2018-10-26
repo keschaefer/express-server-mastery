@@ -1,61 +1,17 @@
 const express = require('express');
 const router = express.Router();
 let students = require('../data/students.json');
+const studentControllers = require('../functions/studentControllers');
 
-router.get('/', getAllCakes());
+router.get('/', studentControllers.getAllStudents);
 
-const getAllCakes = (req, res, next) => {
-  res.json({ students : students })
-};
+router.get('/:id', studentControllers.getOneStudent);
 
-router.get('/:id', getOneCake());
+router.post('/', studentControllers.postStudents);
 
-const getOneCake = (req, res, next) => {
-  const id = req.params.id
-  let theStudent = students.filter(student => student.id == id)
-  (!Number(id) || id > students.length) ? res.json({error: {status: 400, message: "Please enter a valid ID number"}}) : res.json({student: theStudent})
-};
+router.put('/:id', studentControllers.putStudents);
 
-router.post('/', (req, res, next) =>{
-  const {id, name, cohort} = req.body
-  if(!name || ! cohort) {
-    res.json({error: {status: 400, message: "Please make sure you have a name and cohort"}})
-  }
-  const newStudent = {id: students.length + 1, name, cohort}
-  students.push(newStudent)
-  res.status(201).json({student: newStudent})
-})
+router.delete('/:id', studentControllers.deleteStudents);
 
-router.put('/:id', (req, res, next) => {
-  const id = req.params.id
-  let {name, cohort} = req.body
-  if(!Number(id)){
-    res.json({error: {status: 400, message: "Please enter a valid ID number"}})
-  } else if (!name || ! cohort) {
-    res.json({error: {status: 400, message: "Please make sure you have all fields filled out"}})
-  } else {
-    let updated = req.body
-    students[id - 1] = {id, name, cohort}
-    let updatedStudents = students.map(student => {
-      if(student.id == id){
-        return {id, name, cohort}
-      } else {
-        return student
-      }
-    })
-    res.json({students : updated})
-  }
-});
-
-router.delete('/:id', (req, res, next) => {
-  const id = req.params.id
-  const deletedStudent = students.filter(student => student.id == id)[0]
-  if(!Number(id) || id > students.length) {
-    res.json({error: {status: 400, message: "Please enter a valid ID number"}})
-  } else {
-  res.status(200).json({ student: deletedStudent })
-  const index = students.indexOf(deletedStudent)
-  students.splice(index, 1)}
-})
 
 module.exports = router;

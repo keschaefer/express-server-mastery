@@ -15,12 +15,6 @@ app.use('/students', studentsRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-
-
-
-
-
-
 function notFound(err, req, res, next) {
   res.status(404).send({error: 'Not found!', status: 404, url: req.originalUrl})
 };
