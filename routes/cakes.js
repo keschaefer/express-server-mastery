@@ -8,8 +8,9 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   const id = req.params.id
-  let theCake = cakes.filter(cake => cake.id == id)
-  !Number(id) ? res.json({error: {status: 400, message: "Please enter a valid ID number"}}) : res.json({cake: theCake})
+  let theCake = cakes.filter(cake => cake.id == id)[0]
+  !Number(id) && id > cakes.length ? res.json({error: {status: 400, message: "Please enter a valid ID number"}}) : res.json({cake: theCake})
+  console.log(theCake);
 });
 
 router.post('/', (req, res, next) => {
@@ -31,6 +32,7 @@ router.put('/:id', (req, res, next) => {
     res.json({error: {status: 400, message: "Please make sure you have all fields filled out"}})
   } else {
     let updated = req.body
+    cakes[id - 1] = {id, name, imageUrl, description}
     let updatedCake = cakes.map(cake => {
       if(cake.id == id){
         return {id, name, imageUrl, description}

@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => {
 router.get('/:id',(req, res, next) => {
   const id = req.params.id
   let theStudent = students.filter(student => student.id == id)
-  !Number(id) ? res.json({error: {status: 400, message: "Please enter a valid ID number"}}) : res.json({student: theStudent})
+  (!Number(id) || id > students.length) ? res.json({error: {status: 400, message: "Please enter a valid ID number"}}) : res.json({student: theStudent})
 })
 
 router.post('/', (req, res, next) =>{
@@ -31,6 +31,7 @@ router.put('/:id', (req, res, next) => {
     res.json({error: {status: 400, message: "Please make sure you have all fields filled out"}})
   } else {
     let updated = req.body
+    students[id - 1] = {id, name, cohort}
     let updatedStudents = students.map(student => {
       if(student.id == id){
         return {id, name, cohort}
