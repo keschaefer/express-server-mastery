@@ -1,0 +1,27 @@
+{
+  "name": "express-server-mastery",
+  "version": "1.0.0",
+  "description": "Today you will be working together with someone else in your cohort to produce an Express server with full CRUD functionality for 2 collections of resources. Your goal is to complete this by the end of the day, but if you do not finish that is ok (you can work it out with your partner to finish over the weekend or next week).",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.4",
+    "nodemon": "^1.18.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svphan1/express-server-mastery.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/svphan1/express-server-mastery/issues"
+  },
+  "homepage": "https://github.com/svphan1/express-server-mastery#readme"
+}
