@@ -10,8 +10,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/', (req, res) => res.json({
-  "cakes": `http://localhost:${port}/cakes`,
-  "students": `http://localhost:${port}/students`
+  "cakes": `https://protected-headland-83497.herokuapp.com/cakes`,
+  "students": `https://protected-headland-83497.herokuapp.com/students`
 }))
 app.use('/cakes', cakesRoutes);
 app.use('/students', studentsRoutes);
