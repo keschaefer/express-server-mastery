@@ -41,4 +41,13 @@ router.put('/:id', (req, res, next) => {
   }
 });
 
+router.delete('/:id', (req, res, next) => {
+  const id = req.params.id
+  const deletedStudent = students.filter(student => student.id == id)[0]
+  res.status(200).json({ student: deletedStudent })
+
+  const index = students.indexOf(deletedStudent)
+  students.splice(index, 1)
+})
+
 module.exports = router;
