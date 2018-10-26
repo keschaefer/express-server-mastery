@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-let students = require('../data/students.json');
 const studentControllers = require('../functions/studentControllers');
 
 router.get('/', studentControllers.getAllStudents);

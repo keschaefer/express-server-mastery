@@ -9,6 +9,7 @@ let studentsRoutes = require('./routes/students');
 app.use(bodyParser.json());
 app.use(cors());
 
+app.get('/', (req, res) => res.send(`Server is running on ${port}`))
 app.use('/cakes', cakesRoutes);
 app.use('/students', studentsRoutes);
 
