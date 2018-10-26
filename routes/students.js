@@ -30,6 +30,7 @@ router.put('/:id', (req, res, next) => {
   } else if (!name || ! cohort) {
     res.json({error: {status: 400, message: "Please make sure you have all fields filled out"}})
   } else {
+    let updated = req.body
     let updatedStudents = students.map(student => {
       if(student.id == id){
         return {id, name, cohort}
@@ -37,7 +38,7 @@ router.put('/:id', (req, res, next) => {
         return student
       }
     })
-    res.json({cakes : updatedStudents})
+    res.json({students : updated})
   }
 });
 

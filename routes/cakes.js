@@ -30,6 +30,7 @@ router.put('/:id', (req, res, next) => {
   } else if (!name || !description || !imageUrl) {
     res.json({error: {status: 400, message: "Please make sure you have all fields filled out"}})
   } else {
+    let updated = req.body
     let updatedCake = cakes.map(cake => {
       if(cake.id == id){
         return {id, name, imageUrl, description}
@@ -37,7 +38,7 @@ router.put('/:id', (req, res, next) => {
         return cake
       }
     })
-    res.json({cakes : updatedCake})
+    res.json({cakes : updated})
   }
 });
 
