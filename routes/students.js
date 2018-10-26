@@ -2,15 +2,19 @@ const express = require('express');
 const router = express.Router();
 let students = require('../data/students.json');
 
-router.get('/', (req, res, next) => {
-  res.json({ students : students })
-});
+router.get('/', getAllCakes());
 
-router.get('/:id',(req, res, next) => {
+const getAllCakes = (req, res, next) => {
+  res.json({ students : students })
+};
+
+router.get('/:id', getOneCake());
+
+const getOneCake = (req, res, next) => {
   const id = req.params.id
   let theStudent = students.filter(student => student.id == id)
   (!Number(id) || id > students.length) ? res.json({error: {status: 400, message: "Please enter a valid ID number"}}) : res.json({student: theStudent})
-})
+};
 
 router.post('/', (req, res, next) =>{
   const {id, name, cohort} = req.body
@@ -46,10 +50,12 @@ router.put('/:id', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
   const id = req.params.id
   const deletedStudent = students.filter(student => student.id == id)[0]
+  if(!Number(id) || id > students.length) {
+    res.json({error: {status: 400, message: "Please enter a valid ID number"}})
+  } else {
   res.status(200).json({ student: deletedStudent })
-
   const index = students.indexOf(deletedStudent)
-  students.splice(index, 1)
+  students.splice(index, 1)}
 })
 
 module.exports = router;

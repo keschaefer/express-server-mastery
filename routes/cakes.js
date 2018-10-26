@@ -47,10 +47,13 @@ router.put('/:id', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
   const id = req.params.id
   const deletedCake = cakes.filter(cake => cake.id == id)[0]
+  if(!Number(id) || id > cakes.length) {
+    res.json({error: {status: 400, message: "Please enter a valid ID number"}})
+  } else {
   res.status(200).json({ cake: deletedCake })
-
   const index = cakes.indexOf(deletedCake)
   cakes.splice(index, 1)
+  }
 })
 
 
