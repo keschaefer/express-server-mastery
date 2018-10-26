@@ -20,8 +20,25 @@ router.post('/', (req, res, next) =>{
   const newStudent = {id: students.length + 1, name, cohort}
   students.push(newStudent)
   res.status(201).json({student: newStudent})
-  
 })
 
+router.put('/:id', (req, res, next) => {
+  const id = req.params.id
+  let {name, cohort} = req.body
+  if(!Number(id)){
+    res.json({error: {status: 400, message: "Please enter a valid ID number"}})
+  } else if (!name || ! cohort) {
+    res.json({error: {status: 400, message: "Please make sure you have all fields filled out"}})
+  } else {
+    let updatedStudents = students.map(student => {
+      if(student.id == id){
+        return {id, name, cohort}
+      } else {
+        return student
+      }
+    })
+    res.json({cakes : updatedStudents})
+  }
+});
 
 module.exports = router;
