@@ -7,7 +7,7 @@ function getAllCakes(req, res, next) {
 function getOneCake(req, res, next) {
   const id = req.params.id
   let theCake = cakes.filter(cake => cake.id == id)[0]
-  return !Number(id) && id > cakes.length ? res.json({ error: { status: 400, message: "Please enter a valid ID number" } }) : res.json({ cake: theCake })
+  return (!Number(id) || id > cakes.length) ? res.json({ error: { status: 400, message: "Please enter a valid ID number" } }) : res.json({ cake: theCake })
 };
 
 function postCakes(req, res, next) {
