@@ -10,7 +10,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/', (req, res) => res.json({
-  "cakes": `https://protected-headland-83497.herokuapp.com/cakes`,
+  "cakes": `https://frozen-lowlands-75112.herokuapp.com/cakes`,
+  "students": `https://frozen-lowlands-75112.herokuapp.com/students`,
   "usage": `GET routes: Use the "cakes" or "students" endpoints to get cakes or students. 
                         Use "cakes/[number]" to get a specific cake, or the same with students
             POST routes: Use "/cakes" or "/students" endpoints to post.
