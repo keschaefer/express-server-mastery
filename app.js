@@ -11,7 +11,10 @@ app.use(cors());
 
 app.get('/', (req, res) => res.json({
   "cakes": `https://protected-headland-83497.herokuapp.com/cakes`,
-  "students": `https://protected-headland-83497.herokuapp.com/students`
+  "usage": `GET routes: Use the "cakes" or "students" endpoints to get cakes or students. 
+                        Use "cakes/[number]" to get a specific cake, or the same with students
+            POST routes: Use "/cakes" or "/students" endpoints to post.
+            PUT/DELETE routes: Use "/cakes/[id number]" or "/students/[id number] to put or delete."`
 }))
 app.use('/cakes', cakesRoutes);
 app.use('/students', studentsRoutes);
