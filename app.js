@@ -16,7 +16,7 @@ app.get('/', (req, res) => res.json({
 }))
 app.use('/cakes', cakesRoutes);
 app.use('/students', studentsRoutes);
-
+//error handling functions
 app.use(notFound);
 app.use(errorHandler);
 
