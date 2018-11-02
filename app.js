@@ -9,10 +9,17 @@ let studentsRoutes = require('./routes/students');
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/', (req, res) => res.json({
+app.get('/', (req, res) => {
+  process.env.NODE_ENV !== 'production' ?
+  res.json({
+    "cakes": `http://localhost:${port}/cakes`,
+    "students": `http://localhost:${port}/students`
+  }) :
+  res.json({
   "cakes": `https://frozen-lowlands-75112.herokuapp.com/cakes`,
   "students": `https://frozen-lowlands-75112.herokuapp.com/students`
-}))
+  }) 
+})
 app.use('/cakes', cakesRoutes);
 app.use('/students', studentsRoutes);
 app.use(notFound);
@@ -28,4 +35,4 @@ function errorHandler(err, req, res, next) {
   res.status(500).send({error: err.message, stack, url: req.originalUrl})
 };
 
-app.listen(port, () => console.log(`Your port is on ${port}`));
+app.listen(port, () => process.env.NODE_ENV !== 'production' ? console.log(`Your port is on http://localhost:${port}`) : console.log(`Your port is on https://frozen-lowlands-75112.herokuapp.com/`));
