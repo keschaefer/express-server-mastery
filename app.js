@@ -35,4 +35,4 @@ function errorHandler(err, req, res, next) {
   res.status(500).send({error: err.message, stack, url: req.originalUrl})
 };
 
-app.listen(port, () => process.env.NODE_ENV !== 'production' ? console.log(`Your port is on http://localhost:${port}`) : console.log(`Your port is on https://frozen-lowlands-75112.herokuapp.com/`));
+app.listen(port, () => process.env.NODE_ENV !== 'production' ? console.log(`I got you on http://localhost:${port}`) : console.log(`Your port is on https://frozen-lowlands-75112.herokuapp.com/`));
